@@ -7,6 +7,9 @@
  */
 package woodm;
 
+/**
+ * A Driver class for the Snake Game. Runs the game.
+ */
 public class SnakeGame {
     public static void main(String[] args) {
         new GameFrame();

@@ -12,6 +12,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
 
+/**
+ * A GamePanel that extends the JPanel and implements an ActionListener.
+ * Displays the actual game.
+ */
 public class GamePanel extends JPanel implements ActionListener {
     private static final int SCREEN_WIDTH = 600;
     private static final int SCREEN_HEIGHT = 600;
@@ -30,6 +34,9 @@ public class GamePanel extends JPanel implements ActionListener {
     private char direction;
     private boolean running;
 
+    /**
+     * Creates a new GamePanel and starts the game.
+     */
     public GamePanel() {
         this.generator = new Random();
         this.x = new int[TOTAL_UNITS];
@@ -68,26 +75,26 @@ public class GamePanel extends JPanel implements ActionListener {
      * @param g Graphics object g used to draw everything needed for the game.
      */
     public void draw(Graphics g) {
-        if(running) {
-            // Draws Lines across x-axis then y-axis to make a grid.
-            for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
-                g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT); // vertical lines
-                g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE); // horizontal lines
+        // Draws Lines across x-axis then y-axis to make a grid.
+        for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
+            g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT); // vertical lines
+            g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE); // horizontal lines
+        }
+        // Draws Apple
+        g.setColor(Color.red);
+        g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
+        // Draws Snake
+        for (int i = 0; i < this.bodyParts; i++) {
+            if (i == 0) { // Sets head of snake to a different color.
+                g.setColor(Color.blue);
+                g.fillRect(this.x[i], this.y[i], UNIT_SIZE, UNIT_SIZE);
+            } else {
+                g.setColor(Color.green);
+                g.fillRect(this.x[i], this.y[i], UNIT_SIZE, UNIT_SIZE);
             }
-
-            g.setColor(Color.red);
-            g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
-
-            for (int i = 0; i < this.bodyParts; i++) {
-                if (i == 0) { // Sets head of snake to a different color.
-                    g.setColor(Color.blue);
-                    g.fillRect(this.x[i], this.y[i], UNIT_SIZE, UNIT_SIZE);
-                } else {
-                    g.setColor(Color.green);
-                    g.fillRect(this.x[i], this.y[i], UNIT_SIZE, UNIT_SIZE);
-                }
-            }
-        } else {
+        }
+        this.displayScore(g);
+        if(!running) {
             this.gameOver(g);
         }
     }
@@ -164,9 +171,31 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-    public void gameOver(Graphics g) {
+    /**
+     * Displays the score at the top of the screen.
+     * @param g Graphics object g used to draw the text for the game over message.
+     */
+    public void displayScore(Graphics g) {
+        final int fontSize = 40;
         g.setColor(Color.red);
-        g.setFont(new Font(""))
+        g.setFont(new Font("Ink Free", Font.BOLD, fontSize));
+        FontMetrics metrics = getFontMetrics(g.getFont());
+        g.drawString("Score: " + this.applesEaten, (SCREEN_WIDTH -
+                metrics.stringWidth("Score: " + this.applesEaten)) / 2, g.getFont().getSize());
+    }
+
+
+    /**
+     * Prints out a message when you lose the game.
+     * @param g Graphics object g used to draw the text for the game over message.
+     */
+    public void gameOver(Graphics g) {
+        final int fontSize = 75;
+        g.setColor(Color.red);
+        g.setFont(new Font("Ink Free", Font.BOLD, fontSize));
+        FontMetrics metrics = getFontMetrics(g.getFont());
+        g.drawString("Game Over", (SCREEN_WIDTH - metrics.stringWidth("Game Over")) / 2,
+                SCREEN_HEIGHT / 2);
     }
 
     @Override
@@ -179,6 +208,9 @@ public class GamePanel extends JPanel implements ActionListener {
         repaint();
     }
 
+    /**
+     * MyKeyAdapter extends the KeyAdapter class and is used to get key inputs from user.
+     */
     public class MyKeyAdapter extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {

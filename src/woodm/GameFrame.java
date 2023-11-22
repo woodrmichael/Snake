@@ -9,8 +9,14 @@ package woodm;
 
 import javax.swing.JFrame;
 
+/**
+ * A GameFrame which extends the JFrame Class
+ */
 public class GameFrame extends JFrame {
 
+    /**
+     * Creates a visible GameFrame with a title of Snake.
+     */
     public GameFrame() {
         this.add(new GamePanel());
         this.setTitle("Snake");
