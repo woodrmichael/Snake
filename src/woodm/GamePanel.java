@@ -19,8 +19,8 @@ public class GamePanel extends JPanel implements ActionListener {
     private static final int TOTAL_UNITS = SCREEN_WIDTH * SCREEN_HEIGHT / UNIT_SIZE;
     private static final int DELAY = 75;
     private static final int STARTING_BODY_PARTS = 6;
-    Timer timer;
-    Random generator;
+    private Timer timer;
+    private Random generator;
     private final int[] x;
     private final int[] y;
     private int bodyParts;
@@ -45,8 +45,16 @@ public class GamePanel extends JPanel implements ActionListener {
         this.startGame();
     }
 
+    /**
+     * Adds an apple to the screen.
+     * Starts the game.
+     * Starts the timer.
+     */
     public void startGame() {
-
+        this.newApple();
+        this.running = true;
+        this.timer = new Timer(DELAY, this);
+        this.timer.start();
     }
 
     @Override
