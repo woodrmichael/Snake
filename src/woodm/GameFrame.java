@@ -4,6 +4,7 @@
  * Personal Project
  * Name: Michael Wood
  * Created: 11/22/2023
+ * Updated: 11/22/2023
  */
 package woodm;
 
@@ -11,6 +12,7 @@ import javax.swing.JFrame;
 
 /**
  * A GameFrame which extends the JFrame Class
+ * @author Michael Wood
  */
 public class GameFrame extends JFrame {
 
