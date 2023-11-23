@@ -137,6 +137,7 @@ public class GamePanel extends JPanel implements ActionListener {
             flag = false;
             this.appleX = this.generator.nextInt(SCREEN_WIDTH / UNIT_SIZE) * UNIT_SIZE;
             this.appleY = this.generator.nextInt(SCREEN_HEIGHT / UNIT_SIZE) * UNIT_SIZE;
+            // Makes sure that the apple isn't generated inside the snake.
             for(int i = 0; i < this.x.length; i++) {
                 if(this.appleX == this.x[i] && i < this.y.length && this.appleY == this.y[i]) {
                     flag = true;
@@ -271,27 +272,32 @@ public class GamePanel extends JPanel implements ActionListener {
     public class MyKeyAdapter extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
+            // Allows for Arrow Key, WASD, or IJKL Movements
             switch(e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
                 case KeyEvent.VK_A:
+                case KeyEvent.VK_J:
                     if(direction != 'R') {
                         direction = 'L';
                     }
                     break;
                 case KeyEvent.VK_RIGHT:
                 case KeyEvent.VK_D:
+                case KeyEvent.VK_L:
                     if(direction != 'L') {
                         direction = 'R';
                     }
                     break;
                 case KeyEvent.VK_UP:
                 case KeyEvent.VK_W:
+                case KeyEvent.VK_I:
                     if(direction != 'D') {
                         direction = 'U';
                     }
                     break;
                 case KeyEvent.VK_DOWN:
                 case KeyEvent.VK_S:
+                case KeyEvent.VK_K:
                     if(direction != 'U') {
                         direction = 'D';
                     }
