@@ -22,7 +22,7 @@ public class GamePanel extends JPanel implements ActionListener {
     private static final int SCREEN_WIDTH = 600;
     private static final int SCREEN_HEIGHT = 600;
     private static final int UNIT_SIZE = 25;
-    private static final int TOTAL_UNITS = SCREEN_WIDTH * SCREEN_HEIGHT / UNIT_SIZE;
+    private static final int TOTAL_UNITS = (SCREEN_WIDTH / UNIT_SIZE) * (SCREEN_HEIGHT / UNIT_SIZE);
     private static final int DELAY = 80;
     private static final int STARTING_BODY_PARTS = 6;
     private Timer timer;
@@ -125,10 +125,29 @@ public class GamePanel extends JPanel implements ActionListener {
 
     /**
      * Creates a new Apple in a random location in the grid.
+     * The apple cannot spawn inside the snake.
      */
     public void newApple() {
-        this.appleX = this.generator.nextInt(SCREEN_WIDTH / UNIT_SIZE) * UNIT_SIZE;
-        this.appleY = this.generator.nextInt(SCREEN_HEIGHT / UNIT_SIZE) * UNIT_SIZE;
+        boolean flag;
+        do {
+            flag = false;
+            this.appleX = this.generator.nextInt(SCREEN_WIDTH / UNIT_SIZE) * UNIT_SIZE;
+            this.appleY = this.generator.nextInt(SCREEN_HEIGHT / UNIT_SIZE) * UNIT_SIZE;
+            for (int i = 0; i < this.x.length; i++) {
+                if (this.appleX == this.x[i] && i < this.y.length && this.appleY == this.y[i]) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) {
+                for (int j = 0; j < this.y.length; j++) {
+                    if (this.appleY == this.y[j] && j < this.x.length && this.appleX == this.x[j]) {
+                        flag = true;
+                        break;
+                    }
+                }
+            }
+        } while (flag);
     }
 
     /**

@@ -10,7 +10,7 @@ package woodm;
 
 /**
  * A Driver class for the Snake Game. Runs the game.
- * @author Michael Wooda
+ * @author Michael Wood
  */
 public class SnakeGame {
     public static void main(String[] args) {
