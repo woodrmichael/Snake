@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements ActionListener {
     private static final int SCREEN_HEIGHT = 600;
     private static final int UNIT_SIZE = 25;
     private static final int TOTAL_UNITS = SCREEN_WIDTH * SCREEN_HEIGHT / UNIT_SIZE;
-    private static final int DELAY = 75;
+    private static final int DELAY = 80;
     private static final int STARTING_BODY_PARTS = 6;
     private Timer timer;
     private final Random generator;
