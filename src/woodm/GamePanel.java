@@ -205,7 +205,6 @@ public class GamePanel extends JPanel implements ActionListener {
                 metrics.stringWidth("Score: " + this.applesEaten)) / 2, g.getFont().getSize());
     }
 
-
     /**
      * Prints out a message when you lose the game.
      * @param g Graphics object g used to draw the text for the game over message.
