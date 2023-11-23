@@ -109,9 +109,12 @@ public class GamePanel extends JPanel implements ActionListener {
      * @param g Graphics object g used to draw the snake.
      */
     public void drawSnake(Graphics g) {
+        final int red = 16;
+        final int green = 148;
+        final int blue = 51;
         for (int i = 0; i < this.bodyParts; i++) {
             if (i == 0) { // Sets head of snake to a different color.
-                g.setColor(Color.blue);
+                g.setColor(new Color(red, green, blue));
                 g.fillRect(this.x[i], this.y[i], UNIT_SIZE, UNIT_SIZE);
             } else {
                 g.setColor(Color.green);
