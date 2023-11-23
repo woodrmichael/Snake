@@ -133,21 +133,21 @@ public class GamePanel extends JPanel implements ActionListener {
             flag = false;
             this.appleX = this.generator.nextInt(SCREEN_WIDTH / UNIT_SIZE) * UNIT_SIZE;
             this.appleY = this.generator.nextInt(SCREEN_HEIGHT / UNIT_SIZE) * UNIT_SIZE;
-            for (int i = 0; i < this.x.length; i++) {
-                if (this.appleX == this.x[i] && i < this.y.length && this.appleY == this.y[i]) {
+            for(int i = 0; i < this.x.length; i++) {
+                if(this.appleX == this.x[i] && i < this.y.length && this.appleY == this.y[i]) {
                     flag = true;
                     break;
                 }
             }
-            if (!flag) {
-                for (int j = 0; j < this.y.length; j++) {
-                    if (this.appleY == this.y[j] && j < this.x.length && this.appleX == this.x[j]) {
+            if(!flag) {
+                for(int j = 0; j < this.y.length; j++) {
+                    if(this.appleY == this.y[j] && j < this.x.length && this.appleX == this.x[j]) {
                         flag = true;
                         break;
                     }
                 }
             }
-        } while (flag);
+        } while(flag);
     }
 
     /**
