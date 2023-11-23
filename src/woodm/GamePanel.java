@@ -85,7 +85,11 @@ public class GamePanel extends JPanel implements ActionListener {
         this.drawSnake(g);
         this.displayScore(g);
         if(!running) {
-            this.gameOver(g);
+            if(this.bodyParts == TOTAL_UNITS) {
+                this.displayEndingMessage(g, "Victory!");
+            } else {
+                this.displayEndingMessage(g, "Game Over");
+            }
         }
     }
 
@@ -225,10 +229,11 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     /**
-     * Prints out a message when you lose the game.
+     * Prints out a message when you win or lose the game
      * @param g Graphics object g used to draw the text for the game over message.
+     * @param message The message that will be printed. Game Over or Victory
      */
-    public void gameOver(Graphics g) {
+    public void displayEndingMessage(Graphics g, String message) {
         // Removes the apple from the screen once you lose.
         g.setColor(Color.black);
         g.fillRect(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
@@ -237,12 +242,16 @@ public class GamePanel extends JPanel implements ActionListener {
         this.drawSnake(g);
         this.displayScore(g);
 
-        // Displays the Game over message to your screen.
+        // Displays the ending message on your screen
         final int fontSize = 75;
-        g.setColor(Color.red);
+        if(message.equals("Victory!")) {
+            g.setColor(Color.blue);
+        } else {
+            g.setColor(Color.red);
+        }
         g.setFont(new Font("Ink Free", Font.BOLD, fontSize));
         FontMetrics metrics = getFontMetrics(g.getFont());
-        g.drawString("Game Over", (SCREEN_WIDTH - metrics.stringWidth("Game Over")) / 2,
+        g.drawString(message, (SCREEN_WIDTH - metrics.stringWidth(message)) / 2,
                 SCREEN_HEIGHT / 2);
     }
 
